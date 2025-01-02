@@ -10,8 +10,10 @@ export function HeroComponent() {
     <div className="mt-4 flex flex-col gap-y-5 items-center">
       <div className="flex flex-col gap-4 items-center">
         <span className="flex flex-col items-center gap-1">
-          <h1 className="text-4xl text-[#E2E2E2] font-bold ">Saad Koraiban</h1>
-          <p className="text-base text-[#7B7B7B] font-inter">
+          <h1 className="md:text-4xl text-3xl text-[#E2E2E2] font-bold ">
+            Saad Koraiban
+          </h1>
+          <p className="md:text-base text-sm text-[#7B7B7B] font-inter">
             Junior Developer Based In Casablanca, Morocco
           </p>
         </span>
@@ -24,7 +26,7 @@ export function HeroComponent() {
           </p>
         </div>
       </div>
-      <div className="flex flex-row gap-x-[10px]">
+      <div className="flex flex-row flex-wrap md:justify-normal justify-center gap-[10px]">
         {SocialsList.map((item, i) => (
           <Link
             href={item.href}
@@ -36,7 +38,7 @@ export function HeroComponent() {
           </Link>
         ))}
       </div>
-      <div className="flex flex-row gap-x-4 items-center">
+      <div className="flex flex-col md:flex-row gap-x-4 gap-y-2 items-center">
         <CopyToClipboard />
         <p className="text-sm text-[#7B7B7B]">or</p>
         <Link href="mailto:kouraybane809@gmail.com">

@@ -25,7 +25,9 @@ import Shadcn from "./softwares/shadcn.svg";
 import VSCode from "./softwares/vscode.svg";
 import Figma from "./softwares/figma.svg";
 import Postman from "./softwares/postman.svg";
-
+import Zustand from "./softwares/zustand.svg";
+import Zod from "./softwares/zod.svg";
+import Lucide from "./softwares/lucide.svg";
 export const Icons = {
   projectIcon: Project,
   avatarIcon: Avatar,
@@ -54,4 +56,7 @@ export const Icons = {
   vscodeIcon: VSCode,
   figmaIcon: Figma,
   postmanIcon: Postman,
+  zustandIcon: Zustand,
+  zodIcon: Zod,
+  lucideIcon: Lucide,
 };

@@ -7,11 +7,11 @@ import Link from "next/link";
 
 export function ProjectCard() {
   return (
-    <>
+    <div className="flex flex-col gap-y-4 ">
       {ProjectsList.map((item) => (
         <div
           key={item.id}
-          className="bg-[#161616] p-5 rounded-xl max-w-[544px] w-full flex flex-row gap-x-4"
+          className="bg-[#161616] p-5 rounded-xl w-full md:w-[544px] flex md:flex-row flex-col gap-x-4 gap-y-2"
         >
           <Image
             src={item.image}
@@ -21,15 +21,15 @@ export function ProjectCard() {
             className="object-cover w-[44px] h-[44px] object-center rounded-lg mt-1"
             quality={100}
           />
-          <div className="flex flex-row flex-1">
-            <div className="flex-1 flex flex-col gap-4">
-              <span className="flex flex-col">
-                <h1 className="text-lg text-white">{item.title}</h1>
-                <p className="text-[#737373] font-inter text-sm">
+          <div className="flex flex-row ">
+            <div className="flex flex-col gap-4">
+              <span className="flex flex-col gap-1 md:gap-0">
+                <h1 className="text-lg text-white w-fit">{item.title}</h1>
+                <p className="text-[#737373] font-inter text-sm ">
                   {item.description}
                 </p>
               </span>
-              <div className="flex flex-row gap-x-[15px] items-center">
+              <div className="flex flex-row flex-wrap gap-[15px] items-center">
                 {item.Icons.map((Icon, i) => (
                   <Icon className="text-white h-[22px] w-[22px] " key={i} />
                 ))}
@@ -46,6 +46,6 @@ export function ProjectCard() {
           </div>
         </div>
       ))}
-    </>
+    </div>
   );
 }

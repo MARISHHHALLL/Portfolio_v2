@@ -27,12 +27,12 @@ export const NavLists = [
 export const SocialsList = [
   {
     Icon: Icons.githubIcon,
-    href: "https://www.facebook.com/profile.php?id=100002120103449",
+    href: "https://github.com/MARISHHHALLL",
     label: "/marishhhalll",
   },
   {
     Icon: Icons.linkedinIcon,
-    href: "https://www.facebook.com/profile.php?id=100002120103449",
+    href: "https://www.linkedin.com/in/saadkouraiban/",
     label: "/saadkoraiban",
   },
   {
@@ -59,6 +59,26 @@ export const ProjectsList = [
       Icons.githubIcon,
     ],
     image: "/images/project-01.jpeg",
+  },
+  {
+    id: 1,
+    title: "Leeetr",
+    description:
+      "I utilized Next.js to develop the user interface for responsive and dynamic web applications. Leveraging its built-in features, I implemented server-side rendering (SSR) and static site generation (SSG) to enhance performance. The UI was created using JavaScript/TypeScript, ensuring a seamless and modern user experience.",
+    viewLink: "/",
+    Icons: [
+      Icons.reactIcon,
+      Icons.nextIcon,
+      Icons.typescriptIcon,
+      Icons.tailwindIcon,
+      Icons.reactQueryIcon,
+      Icons.gitIcon,
+      Icons.githubIcon,
+      Icons.zodIcon,
+      Icons.lucideIcon,
+      Icons.zustandIcon,
+    ],
+    image: "/images/leeetr_logo.jpg",
   },
 ];
 
