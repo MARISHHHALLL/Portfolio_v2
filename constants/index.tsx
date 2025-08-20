@@ -37,7 +37,7 @@ export const SocialsList = [
   },
   {
     Icon: Icons.instagramIcon,
-    href: "https://www.facebook.com/profile.php?id=100002120103449",
+    href: "#",
     label: "@saad.koraiban",
   },
 ];
