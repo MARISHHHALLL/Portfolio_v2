@@ -1,25 +1,27 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque, Inter } from "next/font/google";
 import Localfont from "next/font/local";
 import "./globals.css";
-import { NavComponent } from "@/components/sections/nav";
 import { cn } from "@/utils/cn";
-import Image from "next/image";
-import { Icons } from "@/icons";
 
-const Bricolage = Bricolage_Grotesque({ subsets: ["latin"] });
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
-const base = Localfont({
-  src: [
-    {
-      path: "../fonts/base.otf",
-      weight: "black",
-    },
-  ],
-  variable: "--font-base",
+/* Both faces are variable fonts, self-hosted from ../fonts so the page never
+   waits on a third-party font host. */
+const doto = Localfont({
+  src: "../fonts/Doto.woff2",
+  weight: "100 900",
+  variable: "--font-doto",
+  display: "swap",
 });
+const geistMono = Localfont({
+  src: "../fonts/GeistMono.woff2",
+  weight: "100 900",
+  variable: "--font-geist-mono",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
-  title: "Portfolio",
+  title: "Saad Koraiban · Full-stack developer",
+  description:
+    "Saad Koraiban, a full-stack developer in Casablanca building web and mobile products with Next.js, React, React Native and Node.",
 };
 
 export default function RootLayout({
@@ -28,26 +30,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <head>
-        <link rel="icon" href={"/avatar.svg"} sizes="any" />
-      </head>
-      <body
-        className={cn(
-          "relative scroll-smooth antialiased z-40",
-          Bricolage.className,
-          base.variable,
-          inter.variable
-        )}
-      >
-        <Image
-          src={"/images/bg-01.png"}
-          fill
-          className="absolute top-0 left-0 h-full w-full  -z-10 opacity-20 object-cover object-center"
-          alt="bg-01"
-        />
-        {/* <NavComponent /> */}
-        <main className="z-50">{children}</main>
+    <html lang="en" className={cn(doto.variable, geistMono.variable)}>
+      {/* favicon.ico, icon.svg and apple-icon.png in app/ are linked by Next;
+          regenerate them with `node scripts/brand-assets.mjs`. */}
+      <body className="min-h-screen bg-ink font-mono text-ash antialiased">
+        {children}
       </body>
     </html>
   );

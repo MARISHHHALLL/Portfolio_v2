@@ -1,5 +1,6 @@
-const ProjectsPage = () => {
-  return <div>hello world</div>;
-};
+import { redirect } from "next/navigation";
 
-export default ProjectsPage;
+/* The portfolio is a single page now; old links land on their section. */
+export default function Page() {
+  redirect("/#work");
+}

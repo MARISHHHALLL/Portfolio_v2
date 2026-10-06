@@ -1,263 +1,137 @@
 import { Icons } from "@/icons";
-import { Home2, Layer, User } from "iconsax-react";
+
+export const PROFILE = {
+  name: "Saad Koraiban",
+  wordmark: "SAAD.K",
+  role: "Full-stack developer",
+  city: "Casablanca, Morocco",
+  timeZone: "Africa/Casablanca",
+  email: "kouraybane809@gmail.com",
+};
 
 export const NavLists = [
-  {
-    Label: "Home",
-    href: "/",
-    Icon: Home2,
-  },
-  // {
-  //   Label: "Projects",
-  //   href: "/projects",
-  //   Icon: Icons.projectIcon,
-  // },
-  {
-    Label: "Skill & Software",
-    href: "/skills-softwares",
-    Icon: Layer,
-  },
-  {
-    Label: "About me",
-    href: "/about",
-    Icon: User,
-  },
+  { label: "work", href: "#work" },
+  { label: "stack", href: "#stack" },
+  { label: "about", href: "#about" },
+  { label: "contact", href: "#contact" },
 ];
 
+/* Instagram is left out until it has a real URL (it was `#`). */
 export const SocialsList = [
   {
     Icon: Icons.githubIcon,
     href: "https://github.com/MARISHHHALLL",
-    label: "/marishhhalll",
+    label: "GitHub",
+    handle: "marishhhalll",
   },
   {
     Icon: Icons.linkedinIcon,
     href: "https://www.linkedin.com/in/saadkouraiban/",
-    label: "/saadkoraiban",
-  },
-  {
-    Icon: Icons.instagramIcon,
-    href: "#",
-    label: "@saad.koraiban",
+    label: "LinkedIn",
+    handle: "saadkouraiban",
   },
 ];
 
-export const ProjectsList = [
+export type ProjectStatus = "LIVE" | "BUILD" | "SHELVED";
+
+export type Project = {
+  id: string;
+  title: string;
+  summary: string;
+  status: ProjectStatus;
+  /* When Saad's own commits start and stop in the repo. */
+  period: string;
+  stack: string[];
+  /* What Saad built, two lines at most. Every claim was checked against
+     git authorship (author kouraybane809@gmail.com): features he created
+     and wrote most of are "built"; ones he only extended say so. */
+  work: string;
+  /* Public URL. Leave undefined until there is a real one; the row only
+     shows a visit link when this is set. */
+  url?: string;
+};
+
+export const ProjectsList: Project[] = [
   {
-    id: 0,
-    title: "Wedecine",
-    description:
-      "These frontend technologies of Wedecine, I used to develop user-interface for responsive and dynamic web applications. Used HTML, CSS for UX and implemented UI using JavaScript / TypeScript.",
-    viewLink: "/",
-    Icons: [
-      Icons.reactIcon,
-      Icons.nextIcon,
-      Icons.typescriptIcon,
-      Icons.tailwindIcon,
-      Icons.reactQueryIcon,
-      Icons.gitIcon,
-      Icons.githubIcon,
-    ],
-    image: "/images/project-01.jpeg",
-  },
-  {
-    id: 1,
+    id: "leeetr",
     title: "Leeetr",
-    description:
-      "I utilized Next.js to develop the user interface for responsive and dynamic web applications. Leveraging its built-in features, I implemented server-side rendering (SSR) and static site generation (SSG) to enhance performance. The UI was created using JavaScript/TypeScript, ensuring a seamless and modern user experience.",
-    viewLink: "/",
-    Icons: [
-      Icons.reactIcon,
-      Icons.nextIcon,
-      Icons.typescriptIcon,
-      Icons.tailwindIcon,
-      Icons.reactQueryIcon,
-      Icons.gitIcon,
-      Icons.githubIcon,
-      Icons.zodIcon,
-      Icons.lucideIcon,
-      Icons.zustandIcon,
-    ],
-    image: "/images/leeetr_logo.jpg",
+    summary: "Digital business cards and pages for professionals.",
+    status: "LIVE",
+    period: "Dec 2024 – May 2026",
+    stack: ["Next 16", "React 19", "TypeScript", "Tailwind CSS", "shadcn/ui", "TanStack Query", "Zustand", "React Hook Form", "Zod", "i18next", "Stripe.js", "ffmpeg.wasm"],
+    work:
+      "Built the web app from the first commit: business card pages, the admin panel for users, categories, articles and featured content, and French and English routing. " +
+      "Added vCard downloads, QR code sharing and in-browser video compression with ffmpeg.wasm.",
+  },
+  {
+    id: "leeetr-mobile",
+    title: "Leeetr Mobile",
+    summary: "The iOS and Android app for Leeetr.",
+    status: "BUILD",
+    period: "May 2025 – Aug 2026",
+    stack: ["Expo 55", "React Native 0.83", "Expo Router", "NativeWind", "Reanimated", "TanStack Query", "Zustand", "MMKV", "React Hook Form", "Zod", "Expo Notifications", "Stripe", "i18next", "EAS Build"],
+    work:
+      "Built the newsletter flow (rich-text compose, drafts, inbox, follow and unfollow) and push notifications on iOS and Android. " +
+      "Added GIF messages, page blocking, private mode and promo-code credit purchases, and localised the app in French and English with RTL support.",
+  },
+  {
+    id: "leeetr-api",
+    title: "Leeetr API",
+    summary: "The NestJS backend behind the Leeetr web and mobile apps.",
+    status: "BUILD",
+    period: "Feb – Jun 2026",
+    stack: ["NestJS 10", "TypeScript", "PostgreSQL", "TypeORM", "Redis", "BullMQ", "WebSockets", "Passport (Google, Apple, Microsoft, JWT)", "Stripe", "Azure Blob Storage", "Expo Push", "Swagger", "Jest", "Docker"],
+    work:
+      "Built real-time messaging over WebSockets with drafts, attachments and scheduled sends, plus a push notification queue on BullMQ and Redis. " +
+      "Added page timelines and page blocking, extended connection requests, and moved Stripe payment methods from users to pages.",
+  },
+  {
+    id: "mariages",
+    title: "mariages.io Admin",
+    summary: "The super-admin back office for a wedding marketplace.",
+    status: "LIVE",
+    period: "Sep 2025 – Jan 2026",
+    stack: ["Next 15", "React 19", "TypeScript", "Tailwind CSS 4", "shadcn/ui", "MUI", "TanStack Query", "TanStack Table", "Zustand", "React Hook Form", "Zod", "Lexical", "Recharts", "next-intl", "Vitest", "Playwright"],
+    work:
+      "Built the help center, supplier tracking, promo codes, advertising management and the revenue and KPI dashboards, plus a Lexical editor for blog articles. " +
+      "Added bulk status and category changes and business creation to vendor management.",
+  },
+  {
+    id: "wedecine",
+    title: "Wedecine",
+    summary: "Landing page for an early-stage product. Shelved.",
+    status: "SHELVED",
+    period: "Oct 2023",
+    stack: ["Next 13", "React 18", "TypeScript", "MUI", "Tailwind CSS", "React Query", "React Hook Form", "Yup"],
+    work: "Reworked the landing page: new backgrounds, Poppins typography and a fixed footer.",
   },
 ];
 
-export const ShortSkillsList = [
+/* The union of what the five projects actually ship, read from their
+   package.json files, CI workflows, Dockerfile and EAS config. */
+export const StackGroups = [
   {
-    id: 0,
-    title: "React",
-    iconColor: "#61DAFB",
-    Icon: Icons.reactIcon,
+    layer: "Frontend",
+    items: ["Next.js", "React", "TypeScript", "Tailwind CSS", "shadcn/ui", "Radix UI", "MUI", "Motion"],
   },
   {
-    id: 1,
-    title: "Next.js",
-    Icon: Icons.nextIcon,
-    iconColor: "#fff",
+    layer: "Mobile",
+    items: ["React Native", "Expo", "Expo Router", "NativeWind", "Reanimated", "MMKV", "Expo Notifications"],
   },
   {
-    id: 2,
-    title: "TypeScript",
-    iconColor: "#3178C6",
-    Icon: Icons.typescriptIcon,
+    layer: "Backend",
+    items: ["Node.js", "NestJS", "PostgreSQL", "TypeORM", "Redis", "BullMQ", "WebSockets", "Passport", "JWT", "Swagger"],
   },
   {
-    id: 3,
-    title: "Tailwind CSS",
-    iconColor: "#06B6D4",
-    Icon: Icons.tailwindIcon,
+    layer: "Data & forms",
+    items: ["TanStack Query", "TanStack Table", "Zustand", "Axios", "React Hook Form", "Zod", "Yup"],
   },
   {
-    id: 4,
-    title: "Firebase",
-    iconColor: "#DD2C00",
-    Icon: Icons.firebaseIcon,
+    layer: "Integrations",
+    items: ["Stripe", "Azure Blob Storage", "Expo Push", "Brevo", "Google Maps", "i18next", "next-intl", "Lexical", "Recharts", "Chart.js", "ffmpeg.wasm", "Socket.IO client"],
   },
   {
-    id: 5,
-    title: "Redux Toolkit",
-    iconColor: "#764ABC",
-    Icon: Icons.reduxIcon,
-  },
-  {
-    id: 6,
-    title: "Npm",
-    iconColor: "#CB3837",
-    Icon: Icons.npmIcon,
-  },
-  {
-    id: 7,
-    title: "React Query",
-    iconColor: "#FF4154",
-    Icon: Icons.reactQueryIcon,
-  },
-  {
-    id: 8,
-    title: "Vercel",
-    iconColor: "#000000",
-    Icon: Icons.vercelIcon,
-  },
-];
-
-export const SkillsList = [
-  {
-    title: "Html",
-    iconColor: "#E34F26",
-    Icon: Icons.htmlIcon,
-  },
-  {
-    title: "Css",
-    iconColor: "#1572B6",
-    Icon: Icons.cssIcon,
-  },
-  {
-    title: "Javascript",
-    iconColor: "#F7DF1E",
-    Icon: Icons.javascriptIcon,
-  },
-  {
-    title: "React",
-    iconColor: "#61DAFB",
-    Icon: Icons.reactIcon,
-  },
-  {
-    title: "Next.js",
-    Icon: Icons.nextIcon,
-    iconColor: "#fff",
-  },
-  {
-    title: "TypeScript",
-    iconColor: "#3178C6",
-    Icon: Icons.typescriptIcon,
-  },
-  {
-    title: "Tailwind CSS",
-    iconColor: "#06B6D4",
-    Icon: Icons.tailwindIcon,
-  },
-  {
-    title: "Strapi",
-    iconColor: "#4945FF",
-    Icon: Icons.strapiIcon,
-  },
-  {
-    title: "Firebase",
-    iconColor: "#DD2C00",
-    Icon: Icons.firebaseIcon,
-  },
-  {
-    title: "Redux Toolkit",
-    iconColor: "#764ABC",
-    Icon: Icons.reduxIcon,
-  },
-  {
-    title: "Git",
-    iconColor: "#F05032",
-    Icon: Icons.gitIcon,
-  },
-  {
-    title: "Github",
-    iconColor: "#fff",
-    Icon: Icons.githubIcon,
-  },
-  {
-    title: "React Query",
-    iconColor: "#FF4154",
-    Icon: Icons.reactQueryIcon,
-  },
-  {
-    title: "Headless UI",
-    iconColor: "#66E3FF",
-    Icon: Icons.headlessIcon,
-  },
-  {
-    title: "Supabase",
-    iconColor: "#3FCF8E",
-    Icon: Icons.supabaseIcon,
-  },
-  {
-    title: "MongoDB",
-    iconColor: "#47A248",
-    Icon: Icons.mongodbIcon,
-  },
-  {
-    title: "Gsap",
-    iconColor: "#FFFCE1",
-    Icon: Icons.gsapIcon,
-  },
-  {
-    title: "Shadcn",
-    iconColor: "#000000",
-    Icon: Icons.shadcnIcon,
-  },
-];
-
-export const Softwares = [
-  {
-    title: "VSCode",
-    // iconColor: "#0277bd",
-    Icon: Icons.vscodeIcon,
-  },
-  {
-    title: "Postman",
-    Icon: Icons.postmanIcon,
-    iconColor: "#FF6C37",
-  },
-  {
-    title: "Figma",
-    Icon: Icons.figmaIcon,
-    iconColor: "#F24E1E",
-  },
-
-  {
-    title: "Npm",
-    Icon: Icons.npmIcon,
-    iconColor: "#CB3837",
-  },
-
-  {
-    title: "Vercel",
-    Icon: Icons.vercelIcon,
-    iconColor: "#000",
+    layer: "Tooling & testing",
+    items: ["Git", "GitHub Actions", "Docker", "EAS Build", "Jest", "Vitest", "Playwright", "ESLint", "Prettier", "Husky"],
   },
 ];

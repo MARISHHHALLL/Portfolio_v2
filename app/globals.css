@@ -3,42 +3,196 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  color-scheme: dark;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+html {
+  background: #0b0d0e;
+  scroll-behavior: smooth;
+  /* the fixed status strip + header sit over anchored sections */
+  scroll-padding-top: 6rem;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: #111111;
-  margin-bottom: 100px;
-}
-::-webkit-scrollbar {
-  height: 15px;
-  width: 15px;
-}
-::-webkit-scrollbar-thumb {
-  border-radius: 9999px;
-  --tw-bg-opacity: 1;
-  background-color: rgb(226 226 226 / var(--tw-bg-opacity));
-  border: 6px solid transparent;
-  background-clip: content-box;
-}
-::-webkit-scrollbar-track {
-  --tw-bg-opacity: 1;
-  background-color: transparent;
+  background: #0b0d0e;
+  color: #d4d4d4;
+  font-family: var(--font-geist-mono), "JetBrains Mono", ui-monospace, monospace;
+  font-variant-numeric: tabular-nums;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+::selection {
+  background: #fafafa;
+  color: #0b0d0e;
+}
+
+:focus-visible {
+  outline: 2px solid #fafafa;
+  outline-offset: 2px;
+  border-radius: 1px;
+}
+
+/* Scrollbar: a hairline rail with a graphite thumb, so the browser chrome
+   belongs to the same panel as the page. */
+html {
+  scrollbar-color: #3a3b3d #0b0d0e;
+  scrollbar-width: thin;
+}
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #0b0d0e;
+}
+::-webkit-scrollbar-thumb {
+  background: #3a3b3d;
+  border: 3px solid #0b0d0e;
+  border-radius: 1px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #5a5b5d;
+}
+
+/* Doto at DPR 1 on Windows gets LCD subpixel antialiasing, which fringes
+   the dots teal and orange. Giving display text its own layer forces
+   grayscale antialiasing, so the dot-matrix stays white. */
+.font-display {
+  will-change: transform;
+  -webkit-font-smoothing: antialiased;
+}
+
+@layer components {
+  /* Section bands: low-opacity texture between sections instead of a
+     background colour change. */
+  .band-hatch {
+    height: 2rem;
+    width: 100%;
+    border-block: 1px solid rgb(255 255 255 / 0.08);
+    color: #fff;
+    opacity: 0.06;
+    background-image: repeating-linear-gradient(
+      -45deg,
+      transparent 0 2px,
+      currentColor 2px 3px,
+      transparent 3px 6px
+    );
+  }
+  .band-dots {
+    height: 1.75rem;
+    width: 100%;
+    border-bottom: 1px solid rgb(255 255 255 / 0.08);
+    color: #fff;
+    opacity: 0.08;
+    background-image: radial-gradient(currentColor 1px, transparent 1px);
+    background-size: 12px 12px;
+  }
+
+  /* Corner brackets: four 8px ticks that draw in one after another when the
+     parent `.bracketed` is hovered or holds focus. */
+  .bracket {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border: 0 solid rgb(250 250 250 / 0);
+    pointer-events: none;
+    transition: border-color 350ms var(--ease-out);
+  }
+  .bracket-tl {
+    top: 6px;
+    left: 6px;
+    border-top-width: 1px;
+    border-left-width: 1px;
+    transition-delay: 120ms;
+  }
+  .bracket-tr {
+    top: 6px;
+    right: 6px;
+    border-top-width: 1px;
+    border-right-width: 1px;
+    transition-delay: 180ms;
+  }
+  .bracket-br {
+    bottom: 6px;
+    right: 6px;
+    border-bottom-width: 1px;
+    border-right-width: 1px;
+    transition-delay: 240ms;
+  }
+  .bracket-bl {
+    bottom: 6px;
+    left: 6px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    transition-delay: 300ms;
+  }
+  .bracketed:hover .bracket,
+  .bracketed:focus-within .bracket,
+  .bracketed:has(details[open]) .bracket,
+  .bracketed-lit .bracket {
+    border-color: rgb(250 250 250 / 0.7);
+  }
+
+  .press {
+    transition-property: color, background-color, border-color, transform;
+    transition-duration: 200ms;
+    transition-timing-function: var(--ease-out);
+  }
+  .press:active {
+    transform: scale(0.97);
+  }
+}
+
+/* Hero boot: the readout lines light up in sequence, once. Content is
+   visible by default; the animation only runs when motion is allowed. */
+@media (prefers-reduced-motion: no-preference) {
+  .boot > * {
+    animation: boot-in 700ms var(--ease-out) both;
+  }
+  .boot > *:nth-child(2) {
+    animation-delay: 90ms;
+  }
+  .boot > *:nth-child(3) {
+    animation-delay: 180ms;
+  }
+  .boot > *:nth-child(4) {
+    animation-delay: 270ms;
+  }
+  @keyframes boot-in {
+    from {
+      opacity: 0;
+      filter: blur(6px);
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      filter: blur(0);
+      transform: none;
+    }
+  }
+}
+
+/* The logo's block caret blinks like the terminal's; it stays lit when motion
+   is reduced. Same rhythm as portfolio-terminal/app/terminal-chrome.css. */
+@media (prefers-reduced-motion: no-preference) {
+  .logo-caret {
+    animation: logo-blink 1.06s steps(1) infinite;
+  }
+  @keyframes logo-blink {
+    50% {
+      opacity: 0;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .press:active {
+    transform: none;
+  }
+  .bracket {
+    transition: none;
   }
 }
